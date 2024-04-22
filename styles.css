@@ -13,9 +13,12 @@ ul{
 nav{
     background-color: cadetblue;
 }
-
+.card>.list-group:last-child{
+    align-items:start ;
+}
 /* Estilos del footer */
 footer{
+    margin-top: 20px;
     padding-top: 15px;
     padding-bottom: 15px;
     background-color: cadetblue;
@@ -24,7 +27,6 @@ footer{
 footer a{
     color: white;
     text-decoration: none;
-    margin-top: 0;
 }
 footer a:hover{
     text-decoration:underline;
