@@ -20,15 +20,14 @@ const bringFilm = async (endpoint) => {
         const datos = await fetch(endpoint)
         if (datos.ok == false) {
             throw new Error("Error al traer datos")
-        } else {
+            
+        } 
             const data = await datos.json()
-            console.log(data)
             createTemplate(data)
-        }
+        
 
     } catch (error) {
-        console.log("hay un error")
-        console.log(error)
+        createError(error)
     }
 }
 
@@ -69,4 +68,10 @@ const createTemplate = (datos) => {
     }
     datos=null
 
+}
+const createError = (mensage) =>{
+    contenedorPelicula.innerHTML = 
+    `<div class="alert alert-warning" role="alert">
+                ${mensage}
+    </div>`
 }
