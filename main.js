@@ -4,6 +4,8 @@ let inputSearch = document.querySelector("form>input");
 console.log(buttonSearch)
 
 
+let movieNotFound="Movie not found!"
+
 buttonSearch.addEventListener("click", (e) => {
     let key = inputSearch.value
     console.log(key)
@@ -19,11 +21,12 @@ const bringFilm = async (endpoint) => {
     try {
         const datos = await fetch(endpoint)
         if (datos.ok == false) {
-            throw new Error("Error al traer datos")
-            
+            throw new Error("Error del servidor")
+
         } 
-            const data = await datos.json()
-            createTemplate(data)
+        const data = await datos.json()
+            
+        createTemplate(data)
         
 
     } catch (error) {
@@ -33,7 +36,9 @@ const bringFilm = async (endpoint) => {
 
 const createTemplate = (datos) => {
     console.log(datos)
-    if (datos > 1) {
+    
+    if (datos.Error!==movieNotFound) {
+        if (datos > 1) {
 
         datos.forEach(pelicula => {
             console.log("hola")
@@ -51,12 +56,12 @@ const createTemplate = (datos) => {
             </ul>
             </div>`
         });
-    } else {
+        } else {
         contenedorPelicula.innerHTML = `
             <div class="card" style="width: 18rem;">
             <img src="${datos.Poster}" class="card-img-top" alt=""${datos.Title}">
             <div class="card-body">
-            <h5 class="card-title">"${datos.Title}</h5>
+            <h5 class="card-title">${datos.Title}</h5>
             <p class="card-text">${datos.Plot}</p>
             </div>
             <ul class="list-group list-group-flush">
@@ -65,8 +70,12 @@ const createTemplate = (datos) => {
                 <li class="list-group-item">${datos.Director}</li>
             </ul>
         </div>`
+        }
+        datos=null  
+    }else{
+        createError("No se ha encontrado la película elegida.")
     }
-    datos=null
+  
 
 }
 const createError = (mensage) =>{
