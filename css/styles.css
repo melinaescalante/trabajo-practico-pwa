@@ -1,3 +1,6 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
 li{
     list-style: none;
     padding: 5px;
@@ -10,11 +13,19 @@ ul{
     align-items: center;
     font-weight: bold;
 }
-nav{
+header{
     background-color: cadetblue;
+    color: white;
+    padding: 30px;
 }
 .card>.list-group:last-child{
     align-items:start ;
+}
+
+.container-fluid p:nth-child(1){
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-top: 30px;
 }
 /* Estilos del footer */
 footer{
