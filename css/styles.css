@@ -18,6 +18,10 @@ header{
     color: white;
     padding: 30px;
 }
+main{
+    min-height: 70vh;
+}
+/* Estilos de la card donde se carga la pelicula */
 .card>.list-group:last-child{
     align-items:start ;
 }
@@ -26,6 +30,23 @@ header{
     font-size: 1.5rem;
     font-weight: 600;
     padding-top: 30px;
+}
+/* Estilos del historial */
+.list-group{
+    min-width: 20rem;
+}
+.list-group-item{
+    width: 100%;
+}
+.btn-primary{
+    color: cadetblue;
+    --bs-btn-border-color: cadetblue!important;
+    --bs-btn-active-border-color:cadetblue;
+    --bs-btn-hover-bg:cadetblue;
+    --bs-btn-hover-border-color:cadetblue;
+    --bs-btn-active-bg:cadetblue;
+    --bs-btn-hover-color:white;
+    background-color: white;
 }
 /* Estilos del footer */
 footer{

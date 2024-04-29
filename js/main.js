@@ -1,18 +1,15 @@
 let contenedorPelicula = document.querySelector(".contenedorPelicula");
 let buttonSearch = document.querySelector(".pelicula .btn.btn-outline-success");
 let inputSearch = document.querySelector("form>input");
-
 let historial = JSON.parse(localStorage.getItem('historial')) || [];
-const borrar=()=>{
-    localStorage.clear()
-}
+// Mensaje de error
 let movieNotFound="Movie not found!"
 
 if (buttonSearch) {
     
     buttonSearch.addEventListener("click", (e) => {
         let key = inputSearch.value
-        // historial.push(key)
+        
         agregarElementoStorage(key) 
         e.preventDefault()
         const EndPoint = `http://www.omdbapi.com/?i=tt3896198&apikey=5b2866d8&t=${key}`
@@ -24,13 +21,7 @@ if (buttonSearch) {
 function agregarElementoStorage(valor) {
     historial.push(valor);
     localStorage.setItem('historial', JSON.stringify(historial));
-    // addHistory(valor)
 }
-
-
-
-
-
 
 const bringFilm = async (endpoint) => {
     
@@ -53,6 +44,7 @@ const bringFilm = async (endpoint) => {
 const createTemplate = (datos) => {
     
     if (datos.Error!==movieNotFound) {
+        // Si se trae mas de una pelicula
         if (datos > 1) {
 
             datos.forEach(pelicula => {
@@ -66,11 +58,12 @@ const createTemplate = (datos) => {
                 <ul class="list-group list-group-flush">
                 <li class="list-group-item">Año: ${pelicula.Year}</li>
                 <li class="list-group-item">Actores: ${pelicula.Actors}</li>
-                <li class="list-group-item">${pelicula.Director}</li>
+                <li class="list-group-item">Director:${pelicula.Director}</li>
                 </ul>
                 </div>`
             });
         } else {
+            // Si la api solo encuentra una pelicula
             contenedorPelicula.innerHTML = `
             <div class="card col-12 col-sm-10 col-md-4 col-lg-4">
             <img src="${datos.Poster}" class="card-img-top" alt=""${datos.Title}">
@@ -92,6 +85,7 @@ const createTemplate = (datos) => {
     
     
 }
+// Template de error sino se encuentra ni una pelicula
 const createError = (mensage) =>{
     contenedorPelicula.innerHTML = 
     `<div class="alert alert-warning" role="alert">
